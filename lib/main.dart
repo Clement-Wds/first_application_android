@@ -52,6 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   String message = '';
 
+  String mail = '';
+  String password = '';
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -80,16 +83,39 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         children: [
           Container(
-            color: Colors.black,
+            color: Colors.white,
             padding: const EdgeInsets.all(20),
             child: TextField(
-              style: const TextStyle(color: Colors.white),
+              onChanged: (String text){
+                setState(() {
+                  mail = text;
+                });
+              },
+              //style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 )
               ),
             )
+          ),
+          Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(20),
+              child: TextField(
+                onChanged: (String text){
+                  setState(() {
+                    password = text;
+                  });
+                },
+                obscureText: true,
+                //style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    )
+                ),
+              )
           ),
           TextField(
             onChanged: (String text){
@@ -105,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
               print("appuyer");
               Navigator.push(context, MaterialPageRoute(
                   builder: (BuildContext context){
-                    return Retour();
+                    return Retour(mail: mail, password: password);
                 }
               ));
             },

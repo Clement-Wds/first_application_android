@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Retour extends StatefulWidget{
+  String mail;
+  String password;
+  Retour({required this.mail, required this.password});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -18,7 +21,7 @@ class RetourState extends State<Retour>{
         title: const Text('Deuxième page'),
         centerTitle: true,
       ),
-      body: const Text('Bienvenue chez Clément'),
+      body: Text('mon adresse mail est la suivante : ${widget.mail} et le mot de passe est ${widget.password}'),
       backgroundColor: const Color(0xFF003296),
     );
   }
