@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "643185743237",
+    "project_id": "ynov-first-android-app",
+    "storage_bucket": "ynov-first-android-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643185743237:android:2e89e62936f59502a1e0ec",
+        "android_client_info": {
+          "package_name": "com.example.first_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643185743237-jevv2na147jroll6egl6o3jjfrihprfn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpA4G8mUmLnRRSkN0F4yj7n798qoX15lE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643185743237-jevv2na147jroll6egl6o3jjfrihprfn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
