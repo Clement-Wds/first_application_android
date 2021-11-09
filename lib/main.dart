@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Ici c\'est Paris !'),
+      home: const MyHomePage(title: 'Application Clem'),
     );
   }
 }
@@ -88,6 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Text(message),
           Image.asset("assets/img/buildings.jpg"),
+          ElevatedButton(onPressed: (){
+              print("appuyer");
+            },
+            child: const Text('connexion'),
+          ),
 
 
         ]
