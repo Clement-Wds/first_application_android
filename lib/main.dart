@@ -1,3 +1,4 @@
+import 'package:first_application/retour.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -90,6 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
           Image.asset("assets/img/buildings.jpg"),
           ElevatedButton(onPressed: (){
               print("appuyer");
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (BuildContext context){
+                    return Retour();
+                }
+              ));
             },
             child: const Text('connexion'),
           ),
