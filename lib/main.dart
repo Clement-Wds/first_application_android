@@ -79,6 +79,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
+          Container(
+            color: Colors.black,
+            padding: const EdgeInsets.all(20),
+            child: TextField(
+              style: const TextStyle(color: Colors.white),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )
+              ),
+            )
+          ),
           TextField(
             onChanged: (String text){
               setState(() {
@@ -88,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           ),
           Text(message),
-          Image.asset("assets/img/buildings.jpg"),
+          Image.asset("assets/img/buildings.jpg", width: 500, height: 250),
           ElevatedButton(onPressed: (){
               print("appuyer");
               Navigator.push(context, MaterialPageRoute(
