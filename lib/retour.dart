@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:first_application/helper/firestorehelper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +22,9 @@ class RetourState extends State<Retour>{
   String nom = "";
   String prenom = "";
   DateTime dateNaissance = DateTime.now() ;
-  var imageProfil;
+  String nameImage ="";
+  late Uint8List? byteImage;
+  String pathImage = "";
   PageController controller = PageController(initialPage : 0);
   @override
   Widget build(BuildContext context) {
@@ -37,14 +42,14 @@ class RetourState extends State<Retour>{
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.all(100),
+          padding: const EdgeInsets.all(100),
           height: MediaQuery.of(context).size.height/1.5,
           width: MediaQuery.of(context).size.width,
 
           child: PageView(
 
             controller: controller,
-            //scrollDirection: Axis.vertical,
+            scrollDirection: Axis.vertical,
             children: [
               Center(
                   child: recupererNom()
@@ -67,7 +72,7 @@ class RetourState extends State<Retour>{
           onPressed: (){
             print("élément suivant");
           },
-          child: Text('Suivant'),
+          child: const Text('Suivant'),
         ),
 
       ],
@@ -103,8 +108,8 @@ class RetourState extends State<Retour>{
       onPressed: (){
         dialogHeure();
       },
-      icon: Icon(Icons.access_time),
-      label: Text('Date'),
+      icon: const Icon(Icons.access_time),
+      label: const Text('Date'),
     );
   }
 
@@ -163,6 +168,44 @@ class RetourState extends State<Retour>{
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
       withData: true,
+    );
+    if(result!=null){
+      setState(() {
+        byteImage = result.files.first.bytes;
+        nameImage = result.files.first.name;
+      });
+      afficherImage();
+    }
+  }
+  
+  afficherImage(){
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context){
+          return AlertDialog(
+            content: Image.memory(byteImage!, width: 250, height: 250,),
+            actions: [
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Annuler'),
+              ),
+              ElevatedButton(
+                onPressed: (){
+                  //Stocker l'image dans la DB
+                  Firestorehelper().stockageImage(nameImage, byteImage!).then((value){
+                    setState(() {
+                      pathImage = value;
+                    });
+                  });
+                },
+                child: const Text('Enregistrer'),
+              ),
+            ],
+          );
+        }
     );
   }
 
