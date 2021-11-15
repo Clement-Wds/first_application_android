@@ -1,4 +1,5 @@
 import 'package:first_application/helper/firestorehelper.dart';
+import 'package:first_application/profile.dart';
 import 'package:first_application/retour.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -62,6 +63,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool valeur= true;
   List tableau = ["Valeur","coucou","Je m'appelle","coucou","Je m'appelle","coucou","Je m'appelle","coucou","Je m'appelle","coucou","Je m'appelle"];
+
+  MessageError(){
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context){
+          return AlertDialog(
+            content: Text('La saisie de votre mail ou mot de passe est incorrecte'),
+            actions: [
+
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  child: Text('OK')
+              ),
+            ],
+          );
+        }
+    );
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -137,11 +159,17 @@ class _MyHomePageState extends State<MyHomePage> {
           Image.asset("assets/img/buildings.jpg", width: 500, height: 250),
           ElevatedButton(onPressed: (){
               print("appuyer");
-              Navigator.push(context, MaterialPageRoute(
-                  builder: (BuildContext context){
-                    return Retour(mail: mail, password: password);
-                }
-              ));
+              Firestorehelper().connect(mail, password).then((value){
+                String identifiant = value.uid;
+                Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context){
+                      //accéder au profil
+                      return ProfilePage();
+                    }
+                ));
+              }).catchError((erreur){
+                MessageError();
+              });
             },
             child: const Text('connexion'),
           ),
