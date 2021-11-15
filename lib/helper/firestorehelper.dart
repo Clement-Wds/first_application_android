@@ -4,21 +4,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 
-class Firestoragehelper{
+class Firestorehelper{
   //Variables
   final firebaseAuth = FirebaseAuth.instance;
   final firebaseStorage = FirebaseStorage.instance;
   final cloudFirestore = FirebaseFirestore.instance;
-  final firestore_profil = FirebaseFirestore.instance.collection("profil");
+  final firestoreProfil = FirebaseFirestore.instance.collection("profil");
 
   //Méthodes
-  register(String mail, String password) async{
+  register(String mail, String password, String nom, String prenom) async{
     var result = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: mail, password: password);
     User user = result.user!;
     String uid = user.uid;
     Map <String, dynamic> map = {
-      "nom": "Walsh de Serrant",
-      "prenom" : "Clément"
+      "nom": nom,
+      "prenom" : prenom
     };
     addUser(map, uid);
   }
@@ -29,7 +29,7 @@ class Firestoragehelper{
     return user;
   }
 
-  addUser(Map<String, dynamic> map, String indentifiant){
-
+  addUser(Map<String, dynamic> map, String identifiant){
+    firestoreProfil.doc(identifiant).set(map);
   }
 }
