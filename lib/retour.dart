@@ -21,8 +21,27 @@ class RetourState extends State<Retour>{
         title: const Text('Deuxième page'),
         centerTitle: true,
       ),
-      body: Text('mon adresse mail est la suivante : ${widget.mail} et le mot de passe est ${widget.password}'),
-      backgroundColor: const Color(0xFF003296),
+      body: bodyPage(),
+    );
+  }
+
+  Widget bodyPage(){
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height/1.5,
+          width: MediaQuery.of(context).size.width,
+          color: Colors.red,
+        ),
+
+        ElevatedButton(
+            onPressed: (){
+              print("élément suivant");
+            },
+            child: Text('Suivant'),
+        ),
+
+      ],
     );
   }
 

@@ -147,7 +147,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
           ElevatedButton(onPressed: (){
-            Firestorehelper().register(mail, password, 'Walsh de Serrant','Clement');
+            //Firestorehelper().register(mail, password, 'Walsh de Serrant','Clement');
+            Navigator.push(context, MaterialPageRoute(
+                builder: (BuildContext context){
+                  return Retour(mail: mail, password: password);
+                }
+            ));
+
           },
             child: const Text('Inscription'),
           ),
