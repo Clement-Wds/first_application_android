@@ -1,6 +1,6 @@
 {
-    "name": "first_application",
-    "short_name": "first_application",
+    "name": "b3firstproject",
+    "short_name": "b3firstproject",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

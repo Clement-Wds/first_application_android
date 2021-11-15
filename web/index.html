@@ -23,17 +23,37 @@
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="first_application">
+  <meta name="apple-mobile-web-app-title" content="b3firstproject">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <title>first_application</title>
+  <title>Application Web</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyA9T5jOLiy4RmB3q9MO-M_h1CSejbLqy0I",
+    authDomain: "ynov-first-android-app.firebaseapp.com",
+    projectId: "ynov-first-android-app",
+    storageBucket: "ynov-first-android-app.appspot.com",
+    messagingSenderId: "643185743237",
+    appId: "1:643185743237:web:c44bec00f45f98faa1e0ec",
+    measurementId: "G-TTK7Q60XP0"
+  };
+// Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+</script>
+
+
+<!-- This script installs service_worker.js to provide PWA functionality to
+     application. For more information, see:
+     https://developers.google.com/web/fundamentals/primers/service-workers -->
+<script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
     function loadMainDartJs() {
