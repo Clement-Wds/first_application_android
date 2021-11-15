@@ -61,12 +61,37 @@ class RetourState extends State<Retour>{
   }
   Widget recupererNom(){
     return TextField(
+      decoration: InputDecoration(
+        hintText: 'Entrez votre nom',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+        )
+      ),
         onChanged: (text){
           setState(() {
-            nom = text;});
+            nom = text;
+          });
         });
 
   }
+
+  Widget recupererPrenom(){
+    return TextField(
+        decoration: InputDecoration(
+            hintText: 'Entrez votre prénom',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            )
+        ),
+        onChanged: (text){
+          setState(() {
+            prenom = text;
+          });
+        });
+
+  }
+
+
 
 
 }
