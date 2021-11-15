@@ -151,13 +151,18 @@ class RetourState extends State<Retour>{
 
   Widget recupererImage() {
     return ElevatedButton.icon(
-      onPressed: () async {
-        final result = await FilePicker.platform.pickFiles();
-        if (result == null) return;
-        final file = result.files.first;
+      onPressed: () {
+        importImages();
       },
-      icon: Icon(Icons.folder),
+      icon: Icon(Icons.upload),
       label: Text('Image'),
+    );
+  }
+
+  importImages() async{
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      withData: true,
     );
   }
 
