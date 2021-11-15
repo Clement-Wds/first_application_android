@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget{
+  String identifiant;
+  ProfilePage({required String this.identifiant});
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -14,10 +17,10 @@ class ProfilePageState extends State<ProfilePage>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        title: Text('Profile Page'),
         centerTitle: true,
       ),
-      body: Text('Je suis dans la page profil'),
+      body: Text(widget.identifiant),
     );
   }
 }

@@ -164,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context, MaterialPageRoute(
                     builder: (BuildContext context){
                       //accéder au profil
-                      return ProfilePage();
+                      return ProfilePage(identifiant: identifiant,);
                     }
                 ));
               }).catchError((erreur){
