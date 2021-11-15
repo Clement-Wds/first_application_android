@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Retour extends StatefulWidget{
@@ -15,8 +16,8 @@ class Retour extends StatefulWidget{
 class RetourState extends State<Retour>{
   String nom = "";
   String prenom = "";
-  var date;
-  var image;
+  DateTime dateNaissance = DateTime.now() ;
+  var imageProfil;
   PageController controller = PageController(initialPage : 0);
   @override
   Widget build(BuildContext context) {
@@ -34,15 +35,25 @@ class RetourState extends State<Retour>{
     return Column(
       children: [
         Container(
+          padding: EdgeInsets.all(100),
           height: MediaQuery.of(context).size.height/1.5,
           width: MediaQuery.of(context).size.width,
+
           child: PageView(
+
             controller: controller,
             scrollDirection: Axis.vertical,
             children: [
-              recupererNom(),
-              Text('Afficher prenom'),
-              Text('Afficher date de naissance'),
+              Center(
+                  child: recupererNom()
+              ),
+
+              Center(
+                  child: recupererPrenom()
+              ),
+              Center(
+                  child: recupererDate()
+              ),
               Text('Afficher image'),
             ],
           ),
@@ -61,37 +72,46 @@ class RetourState extends State<Retour>{
   }
   Widget recupererNom(){
     return TextField(
-      decoration: InputDecoration(
-        hintText: 'Entrez votre nom',
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20),
-        )
-      ),
-        onChanged: (text){
-          setState(() {
-            nom = text;
-          });
-        });
-
-  }
-
-  Widget recupererPrenom(){
-    return TextField(
         decoration: InputDecoration(
-            hintText: 'Entrez votre prénom',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-            )
+          hintText: 'Entrez votre nom',
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
         ),
         onChanged: (text){
           setState(() {
-            prenom = text;
-          });
+            nom = text;});
         });
 
   }
+  Widget recupererPrenom(){
+    return TextField(
+        decoration: InputDecoration(
+          hintText: 'Entrez votre prénom',
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        ),
+        onChanged: (text){
+          setState(() {
+            prenom = text;});
+        });
 
+  }
+  Widget recupererDate(){
+    return ElevatedButton.icon(
+      onPressed: (){
+        dialogHeure();
+      },
+      icon: Icon(Icons.access_time),
+      label: Text('Date'),
+    );
+  }
 
-
+  Future dialogHeure(){
+    return showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2001),
+        lastDate: DateTime(2040),
+      initialDatePickerMode: DatePickerMode.day,
+    );
+  }
 
 }
