@@ -1,3 +1,5 @@
+import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +44,7 @@ class RetourState extends State<Retour>{
           child: PageView(
 
             controller: controller,
-            scrollDirection: Axis.vertical,
+            //scrollDirection: Axis.vertical,
             children: [
               Center(
                   child: recupererNom()
@@ -54,7 +56,9 @@ class RetourState extends State<Retour>{
               Center(
                   child: recupererDate()
               ),
-              Text('Afficher image'),
+              Center(
+                child: recupererImage()
+              ),
             ],
           ),
         ),
@@ -104,13 +108,56 @@ class RetourState extends State<Retour>{
     );
   }
 
-  Future dialogHeure(){
-    return showDatePicker(
+  dialogHeure(){
+    showDialog(
         context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2001),
-        lastDate: DateTime(2040),
-      initialDatePickerMode: DatePickerMode.day,
+        barrierDismissible: true,
+        builder: (BuildContext context){
+          return AlertDialog(
+            content: Container(
+              height: 100,
+              width: 400,
+              color: Colors.white,
+              child: DatePicker(
+                DateTime.now(),
+                initialSelectedDate: DateTime.now(),
+                selectedTextColor: Colors.black,
+                onDateChange: (date){
+                  setState(() {
+                    dateNaissance = date;
+                  });
+                },
+              ),
+            ),
+
+            actions: [
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  child: Text('Annuler'),
+              ),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  child: Text('Valider'),
+              ),
+            ],
+          );
+        }
+    );
+  }
+
+  Widget recupererImage() {
+    return ElevatedButton.icon(
+      onPressed: () async {
+        final result = await FilePicker.platform.pickFiles();
+        if (result == null) return;
+        final file = result.files.first;
+      },
+      icon: Icon(Icons.folder),
+      label: Text('Image'),
     );
   }
 
