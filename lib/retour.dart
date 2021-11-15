@@ -49,7 +49,7 @@ class RetourState extends State<Retour>{
           child: PageView(
 
             controller: controller,
-            scrollDirection: Axis.vertical,
+            //scrollDirection: Axis.vertical,
             children: [
               Center(
                   child: recupererNom()
@@ -70,9 +70,15 @@ class RetourState extends State<Retour>{
 
         ElevatedButton(
           onPressed: (){
-            print("élément suivant");
+            Map <String, dynamic> map ={
+              "PRENOM": prenom,
+              "NOM": nom,
+              "BIRTHDAY": dateNaissance,
+              "IMAGE": pathImage,
+            };
+            Firestorehelper().register(widget.mail, widget.password, map);
           },
-          child: const Text('Suivant'),
+          child: const Text('Enregistrement'),
         ),
 
       ],
@@ -200,6 +206,7 @@ class RetourState extends State<Retour>{
                       pathImage = value;
                     });
                   });
+                  Navigator.pop(context);
                 },
                 child: const Text('Enregistrer'),
               ),

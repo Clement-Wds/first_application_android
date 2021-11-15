@@ -16,14 +16,10 @@ class Firestorehelper{
   final firestockageImage = FirebaseStorage.instance.ref("imageProfil");
 
   //Méthodes
-  register(String mail, String password, String nom, String prenom) async{
+  register(String mail, String password, Map<String, dynamic> map) async{
     var result = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: mail, password: password);
     User user = result.user!;
     String uid = user.uid;
-    Map <String, dynamic> map = {
-      "nom": nom,
-      "prenom" : prenom
-    };
     addUser(map, uid);
   }
 
