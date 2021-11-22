@@ -1,4 +1,7 @@
+import 'package:first_application/helper/firestorehelper.dart';
 import 'package:flutter/material.dart';
+
+import 'model/profile.dart';
 
 class ProfilePage extends StatefulWidget{
   String identifiant;
@@ -12,6 +15,17 @@ class ProfilePage extends StatefulWidget{
 }
 
 class ProfilePageState extends State<ProfilePage>{
+  Profile utilisateur = Profile.Empty();
+  @override
+  void initState(){
+    //TODO: implement initState
+    super.initState();
+    Firestorehelper().getProfil(widget.identifiant).then((value){
+      setState(() {
+        utilisateur = value;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -20,7 +34,7 @@ class ProfilePageState extends State<ProfilePage>{
         title: Text('Profile Page'),
         centerTitle: true,
       ),
-      body: Text(widget.identifiant),
+      body: Image.network(utilisateur.image, width: 200, height: 200),
     );
   }
 }

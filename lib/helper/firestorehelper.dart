@@ -1,10 +1,12 @@
 //Importation
+import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:first_application/model/profile.dart';
 
 
 class Firestorehelper{
@@ -39,6 +41,23 @@ class Firestorehelper{
     //récupération du chemin de l'image dans la base de données
     String url = await download.ref.getDownloadURL();
     return url;
+  }
+
+  String getIdentifiant(){
+    //récupérer l'identifiant de l'utilisateur connecté
+    String id;
+    id = FirebaseAuth.instance.currentUser!.uid;
+    return id;
+  }
+
+  Future<Profile> getProfil(String identifiant) async {
+    //Récupération de la collection et le document dans la base de données
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection("profil")
+        .doc(identifiant).get();
+
+    //Construction du type Profil dans notre exemple
+    return Profile(snapshot);
   }
 
 }

@@ -13,7 +13,9 @@ class Profile{
     lastname = map["NOM"];
     image = map["IMAGE"];
 
-    Timestamp time = map["BIRHTDAY"];
-    birthday = time.toDate();
+    //Timestamp time = map["BIRHTDAY"];
+    //birthday = time.toDate();
   }
+
+  Profile.Empty();
 }
