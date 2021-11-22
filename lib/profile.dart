@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:first_application/helper/firestorehelper.dart';
 import 'package:flutter/material.dart';
 
@@ -31,10 +32,50 @@ class ProfilePageState extends State<ProfilePage>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile Page'),
+        title: const Text('Profile Page'),
         centerTitle: true,
       ),
-      body: Image.network(utilisateur.image, width: 200, height: 200),
+        body: bodyPage(),
+    );
+  }
+
+  Widget bodyPage(){
+    return StreamBuilder<QuerySnapshot>(
+        stream: Firestorehelper().firestoreProfil.snapshots(),
+        builder: (BuildContext context, snapshot){
+          if (!snapshot.hasData){
+            return const CircularProgressIndicator();
+          }
+          else
+          {
+            List documents = snapshot.data!.docs;
+
+            return ListView.builder(
+              itemCount: documents.length,
+              itemBuilder: (BuildContext context, int index){
+                Profile user = Profile(documents[index]) ;
+                return Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(user.name),
+                          Text(" "),
+                          Text(user.lastname)
+                        ],
+                      ),
+                      Image.network(user.image, width: 200, height: 200),
+                    ],
+
+                  ),
+                );
+              },
+            );
+
+          }
+        }
     );
   }
 }

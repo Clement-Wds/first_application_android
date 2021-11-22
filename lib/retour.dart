@@ -199,9 +199,9 @@ class RetourState extends State<Retour>{
                   child: const Text('Annuler'),
               ),
               ElevatedButton(
-                onPressed: (){
+                onPressed: () async{
                   //Stocker l'image dans la DB
-                  Firestorehelper().stockageImage(nameImage, byteImage!).then((value){
+                  await Firestorehelper().stockageImage(nameImage, byteImage!).then((value){
                     setState(() {
                       pathImage = value;
                     });
